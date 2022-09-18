@@ -17,7 +17,6 @@ class NueralNetwork():
         h_o = self.activation(output_1)
         output_2 = np.dot(h_o, self.o_weights) + self.o_biases
         h2_o = self.activation(output_2)
-        #print("final output", h2_o)
         return h2_o
 
     def activation(self, inputs):
@@ -48,7 +47,6 @@ class NueralNetwork():
         matrix[single_point : self.n_nueron, 0: self.n_output]=wo_2[single_point : self.n_nueron, 0: self.n_output]
 
         self.o_weights=matrix
-        #print(self.o_weights)
 
         matrix = np.zeros((1, self.n_output))
         #rand= random.randint(0,1)
@@ -61,7 +59,6 @@ class NueralNetwork():
         #matrix[0:1, single_point:self.n_output] = bo_2[0:1, single_point:self.n_output]
         
         self.o_biases = matrix  
-        #print(self.o_biases)
 
     def mutate(self, rate):
         for i in range(self.n_inputs):

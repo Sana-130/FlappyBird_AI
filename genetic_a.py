@@ -1,5 +1,4 @@
 from asyncio.windows_events import NULL
-from operator import index
 import random
 import bird
 import settings as val
@@ -8,13 +7,13 @@ def advanced(group):
     check_fitness(group)
     bird_array = advanced_selection(val.NEW_POPULATION, group)
     return bird_array
-    
+
 def create_population(group):
     new_birds=[]
     check_fitness(group)
     for i in range(val.NEW_POPULATION):
         new1 =pool_selection(group)
-        if new1!=NULL:
+        if new1!= NULL:
             new_birds.append(new1)
             #new_birds.append(new2)
 
@@ -76,7 +75,7 @@ def pool_selection(group):
     #print(offspring.brain.o_biases, offspring.brain.h_weights)
     '''
     parent2=group[index2]
-    offspring = bird.Bird(200, 200, bird.screen, False )#parent1.brain)
+    offspring = bird.Bird(200, 200, False )#parent1.brain)
     #offspring2=  bird.Bird(200, 200, bird.screen, False )
         #crossover
     
@@ -128,21 +127,24 @@ def check_fitness(group):
 
 def advanced_selection(n, group):
     next_pop=[]
-    first_ratio_num = 0.4 * n
+    #0.4, 0.2, 0.2 0.2
+    first_ratio_num = 0.2 * n
     ratio_num = int(len(group)-first_ratio_num)
     best_bird = group[ratio_num:]
-    for i in best_bird:
-        next_pop.append(i)
 
+    for i in best_bird:
+        offspring= i
+        #offspring.brain.mutate(0.3)
+        next_pop.append(offspring)
     
-    second_ratio_num = 0.2 * n
+    second_ratio_num = 0.3 * n
     for i in range(round(second_ratio_num/2)):
         index = -2
         parent1 = group[-1]
         parent2= group[index]
 
-        offspring = bird.Bird(200, 200, bird.screen, False)#parent1.brain)
-        offspring2 =bird.Bird(200, 200, bird.screen, False)#parent1.brain)
+        offspring = bird.Bird(200, 200, False)#parent1.brain)
+        offspring2 =bird.Bird(200, 200, False)#parent1.brain)
     #offspring2=  bird.Bird(200, 200, bird.screen, False )
         #crossover
     
@@ -173,8 +175,8 @@ def advanced_selection(n, group):
         parent1 = group[-2]
         parent2 = group[index]
 
-        offspring = bird.Bird(200, 200, bird.screen, False )
-        offspring2 =bird.Bird(200, 200, bird.screen, False) #parent1.brain)
+        offspring = bird.Bird(200, 200, False )
+        offspring2 =bird.Bird(200, 200, False) #parent1.brain)
     #offspring2=  bird.Bird(200, 200, bird.screen, False )
         #crossover
     
@@ -205,7 +207,7 @@ def advanced_selection(n, group):
     for i in range(int(third_ratio)):
         rand = random.randint(-3, -1)
         parent = group[rand]
-        offspring = bird.Bird(200, 200, bird.screen, parent.brain)
+        offspring = bird.Bird(200, 200, parent.brain)
         offspring.brain.mutate(0.3)
         next_pop.append(offspring)
 
